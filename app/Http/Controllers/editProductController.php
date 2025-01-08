@@ -3,11 +3,19 @@
     require_once(__DIR__ . '/../../Models/Products.php');
     require_once(__DIR__ . '/../../../public/editProduct.php');
 
+    $action = $_POST['action'];
     $id = $_POST['product_id'];
 
-    $editProduct = new EditProduct();
-    $editProduct->set($id);
+    if ($action == "edit") {
+        $editProduct = new EditProduct();
+        $editProduct->set($id);
+    
+        header("Location: ../../../public/editProduct.php?product_id=" . $id);
+    } elseif ($action == "delete") {
+        header("Location: ../../../public/index.php");
+    } else {
+        header("Location: ../../../public/index.php");
+    }
 
-    header("Location: ../../../public/editProduct.php?product_id=" . $id);
     exit;
 ?>

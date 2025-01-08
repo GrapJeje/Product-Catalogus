@@ -20,8 +20,6 @@ class Products
             $this->description = $product['description'];
             $this->price = $product['price'];
             $this->stock = $product['stock'];
-        } else {
-            throw new Exception("Product with ID $id not found.");
         }
     }
 
@@ -77,7 +75,7 @@ class Products
 
     public function toCsv()
     {
-        $this->id . "," . $this->name . "," . $this->description . "," . $this->price . "," . $this->stock;
+        return $this->id . "," . $this->name . "," . $this->description . "," . $this->price . "," . $this->stock;
     }
 
     public static function writeToCsv($id, $productsCsv)

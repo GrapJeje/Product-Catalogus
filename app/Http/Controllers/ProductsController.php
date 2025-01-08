@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once(__DIR__ . '/../../Models/Products.php');
 
@@ -21,8 +21,8 @@ class ProductsController
                 echo "<td>";
                 echo "<form method=\"POST\" action=\"../app/Http/Controllers/editProductController.php\" class=\"action-buttons-form\">";
                 echo "<input type=\"hidden\" name=\"product_id\" value=\"{$product['id']}\">";
-                echo "<button type=\"submit\" class=\"edit-button\">Bewerken</button>";
-                echo "<button type=\"submit\" class=\"delete-button\">Verwijderen</button>";
+                echo "<button type=\"submit\" name=\"action\" value=\"edit\" class=\"edit-button\">Bewerken</button>";
+                echo "<button type=\"submit\" name=\"action\" value=\"delete\" class=\"delete-button\">Verwijderen</button>";
                 echo "</form>";
                 echo "</td>";
 
