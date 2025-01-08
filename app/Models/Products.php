@@ -9,19 +9,18 @@ class Products
     public $stock;
 
     public function __construct($id)
-    {
-        $this->id = $id;
+{
+    $this->id = $id;
 
-        $products = $this::getProducts();
+    $product = self::getProductById($id);
 
-        if (isset($products[$id])) {
-            $product = $products[$id];
-            $this->name = $product['name'];
-            $this->description = $product['description'];
-            $this->price = $product['price'];
-            $this->stock = $product['stock'];
-        }
+    if ($product) {
+        $this->name = $product['name'];
+        $this->description = $product['description'];
+        $this->price = $product['price'];
+        $this->stock = $product['stock'];
     }
+}
 
     public function getId()
     {
@@ -76,6 +75,51 @@ class Products
     public function toCsv()
     {
         return $this->id . "," . $this->name . "," . $this->description . "," . $this->price . "," . $this->stock;
+    }
+
+    public static function getProductById($id)
+    {
+        $products = self::getProducts();
+
+        foreach ($products as $product) {
+            if ($product['id'] == $id) {
+                return $product;
+            }
+        }
+
+        return null;
+    }
+
+    public static function deleteProduct($id)
+    {
+        $products = self::getProducts();
+
+        $products = array_filter($products, fn($product) => $product['id'] !== $id);
+
+        if (count($products) === count(self::getProducts())) {
+            throw new Exception("Product met ID {$id} niet gevonden.");
+        }
+
+        self::writeToCsvb($products);
+
+        return true;
+    }
+
+    public static function writeToCsvb($products)
+    {
+        $filePath = __DIR__ . '/../../data/products.csv';
+
+        if (($file = fopen($filePath, 'w')) !== false) {
+            fputcsv($file, ['id', 'name', 'description', 'price', 'stock']);
+            
+            foreach ($products as $product) {
+                fputcsv($file, $product);
+            }
+
+            fclose($file);
+        } else {
+            throw new Exception("Kan het bestand \"products.csv\" niet openen voor schrijven.");
+        }
     }
 
     public static function writeToCsv($id, $productsCsv)

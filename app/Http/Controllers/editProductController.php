@@ -12,6 +12,7 @@
     
         header("Location: ../../../public/editProduct.php?product_id=" . $id);
     } elseif ($action == "delete") {
+        Products::deleteProduct($id);
         header("Location: ../../../public/index.php");
     } else {
         header("Location: ../../../public/index.php");
