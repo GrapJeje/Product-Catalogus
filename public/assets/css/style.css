@@ -134,3 +134,94 @@ form button:hover {
     background-color: #c0392b;
     transform: translateY(-2px);
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .product-table th, .product-table td {
+        padding: 0.5rem;
+    }
+
+    .form-section h2 {
+        font-size: 1.25rem;
+    }
+
+    form input,
+    form button {
+        flex: 1 1 100%;
+    }
+
+    .form-row {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .form-row .form-group {
+        width: 100%;
+    }
+
+    .back-button button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 553px) {
+    .product-table {
+        width: 100%;
+        overflow-x: auto;
+        display: block; /* Allow scrolling */
+    }
+
+    .product-table th, .product-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+
+    .back-button button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Reduce table cell padding for smaller screens */
+    .product-table th, .product-table td {
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .search-bar input[type="text"] {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .product-table th, .product-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+
+    .back-button button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
