@@ -49,7 +49,7 @@
         </div>
     </div>
 
-
+    <?php require_once('../../../../config/php/footer.php'); ?>
 </body>
 
 </html>
