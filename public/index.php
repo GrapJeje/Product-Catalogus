@@ -16,11 +16,6 @@
     </header>
 
     <div class="container">
-        <!-- Zoekfunctie -->
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Zoek op naam of prijs...">
-        </div>
-
         <!-- Productoverzicht -->
         <table class="product-table">
             <thead>
@@ -43,7 +38,7 @@
         <!-- Formulier om producten toe te voegen -->
         <div class="form-section">
             <h2>Product toevoegen/bewerken</h2>
-            <form action="product_handler.php" method="post">
+            <form action="../app/Http/Controllers/newProductController.php" method="post">
                 <input type="hidden" name="product_id" placeholder="ID (voor bewerken)">
                 <input type="text" name="product_name" placeholder="Naam van het product" required>
                 <input type="text" name="product_description" placeholder="Beschrijving" required>

@@ -18,5 +18,4 @@
         header("Location: ../../../public/index.php");
     }
 
-    exit;
-?>
+    exit();

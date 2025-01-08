@@ -9,18 +9,18 @@ class Products
     public $stock;
 
     public function __construct($id)
-{
-    $this->id = $id;
+    {
+        $this->id = $id;
 
-    $product = self::getProductById($id);
+        $product = self::getProductById($id);
 
-    if ($product) {
-        $this->name = $product['name'];
-        $this->description = $product['description'];
-        $this->price = $product['price'];
-        $this->stock = $product['stock'];
+        if ($product) {
+            $this->name = $product['name'];
+            $this->description = $product['description'];
+            $this->price = $product['price'];
+            $this->stock = $product['stock'];
+        }
     }
-}
 
     public function getId()
     {
@@ -77,6 +77,20 @@ class Products
         return $this->id . "," . $this->name . "," . $this->description . "," . $this->price . "," . $this->stock;
     }
 
+    public static function getNewId()
+    {
+        $products = self::getProducts();
+        $id = 0;
+
+        foreach ($products as $product) {
+            if ($product['id'] > $id) {
+                $id = $product['id'];
+            }
+        }
+
+        return $id + 1;
+    }
+
     public static function getProductById($id)
     {
         $products = self::getProducts();
@@ -111,7 +125,7 @@ class Products
 
         if (($file = fopen($filePath, 'w')) !== false) {
             fputcsv($file, ['id', 'name', 'description', 'price', 'stock']);
-            
+
             foreach ($products as $product) {
                 fputcsv($file, $product);
             }
@@ -126,18 +140,20 @@ class Products
     {
         $filePath = __DIR__ . '/../../data/products.csv';
         $lines = [];
+        $productFound = false;
 
         if (($file = fopen($filePath, 'r')) !== false) {
             while (($data = fgetcsv($file)) !== false) {
                 $lines[] = ($data[0] === $id) ? str_getcsv($productsCsv) : $data;
+                $productFound = $productFound || ($data[0] === $id);
             }
             fclose($file);
         }
 
+        if (!$productFound) $lines[] = str_getcsv($productsCsv);
+
         if (($file = fopen($filePath, 'w')) !== false) {
-            foreach ($lines as $line) {
-                fputcsv($file, $line);
-            }
+            foreach ($lines as $line) fputcsv($file, $line);
             fclose($file);
         } else {
             throw new Exception("Kan het bestand niet openen voor schrijven: {$filePath}");
